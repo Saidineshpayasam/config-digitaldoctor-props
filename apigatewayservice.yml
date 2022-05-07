@@ -23,22 +23,22 @@ spring:
             exposedHeaders: "*"
       routes:
         - id: userservice
-          uri: lb://userservice
+          uri: http://localhost:8075
           predicates:
-            - Path=/userservice/**
+            - Path=/api/v1/***
           filters:
             - RewritePath=/userservice(?<segment>/?.*), $\{segment}
 
-        - id: authenticationservice
-          uri: lb://authenticationservice
+        - id: authentication
+          uri: http://localhost:8095
           predicates:
-            - Path=/authenticationservice/**
+            - Path=/api/v1/user/**
           filters:
-            - RewritePath=/authenticationservice(?<segment>/?.*), $\{segment}
+            - RewritePath=/authentication(?<segment>/?.*), $\{segment}
 
         - id: appointmentservice
-          uri: lb://appointmentservice
+          uri: http://localhost:8060
           predicates:
-            - Path=/appointmentservice/**
+            - Path=/api/v1/**
           filters:
             - RewritePath=/appointmentservice(?<segment>/?.*), $\{segment}
